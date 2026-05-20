@@ -1,103 +1,116 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <!-- Primary Meta -->
-  <meta name="description" content="UUID批量生成器。支持UUID v4/随机、v7/时间排序、v1/时间戳。批量生成多达10,000个，多种格式选项。">
-  <meta name="keywords" content="uuid generator, uuid v4, uuid v7, uuid v1, generate uuid online, bulk uuid, uuid生成器">
+  <meta name="description" content="Generate UUIDs online in bulk. Create UUID v4, v7, and v1 values with formatting options, copy or download results instantly.">
+  <meta name="keywords" content="uuid generator, uuid v4 generator, uuid v7 generator, uuid v1 generator, bulk uuid generator, random uuid">
   <meta name="author" content="Dudu Tools">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://uuid-generator.vercel.app/">
-
-  <!-- Open Graph -->
+  <link rel="alternate" hreflang="en" href="https://uuid-generator.vercel.app/">
+  <link rel="alternate" hreflang="zh-CN" href="https://uuid-generator.vercel.app/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://uuid-generator.vercel.app/">
+<!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="UUID Generator - 免费在线工具">
-  <meta property="og:description" content="UUID批量生成器。支持UUID v4/随机、v7/时间排序、v1/时间戳。批量生成多达10,000个，多种格式选项。">
+  <meta property="og:title" content="UUID Generator Online | Bulk UUID v4, v7 and v1">
+  <meta property="og:description" content="Generate UUIDs online in bulk. Create UUID v4, v7, and v1 values with formatting options, copy or download results instantly.">
   <meta property="og:url" content="https://uuid-generator.vercel.app/">
-  <meta property="og:image" content="https://uuid-generator.vercel.app/og-image.png">
-  <meta property="og:site_name" content="UUID Generator">
-  <meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="UUID Generator">
+  <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="UUID Generator - 免费在线工具">
-  <meta name="twitter:description" content="UUID批量生成器。支持UUID v4/随机、v7/时间排序、v1/时间戳。批量生成多达10,000个，多种格式选项。">
-  <meta name="twitter:image" content="https://uuid-generator.vercel.app/og-image.png">
-  <meta charset="UTF-8">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UUID Generator Online | Bulk UUID v4, v7 and v1">
+  <meta name="twitter:description" content="Generate UUIDs online in bulk. Create UUID v4, v7, and v1 values with formatting options, copy or download results instantly.">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UUID Generator - 免费在线工具 | 浏览器端处理 · 隐私安全</title>
+  <title>UUID Generator Online | Bulk UUID v4, v7 and v1</title>
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "UUID Generator",
-  "description": "UUID批量生成器。支持UUID v4/随机、v7/时间排序、v1/时间戳。批量生成多达10,000个，多种格式选项。",
+  "description": "Generate UUIDs online in bulk. Create UUID v4, v7, and v1 values with formatting options, copy or download results instantly.",
   "url": "https://uuid-generator.vercel.app/",
+  "inLanguage": "en",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "All",
   "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
   },
   "featureList": [
-    "UUID v4（随机）生成",
-    "UUID v7（时间排序，DB友好）",
-    "UUID v1（时间戳格式）",
-    "批量生成1-10,000个",
-    "大写/小写/花括号/引号",
-    "一键复制或下载"
-  ]
+    "Generate UUID v4 values",
+    "Generate UUID v7 time-ordered values",
+    "Generate UUID v1 timestamp values",
+    "Create up to 10,000 UUIDs at once",
+    "Choose uppercase, braces, quotes, and comma formats",
+    "Copy or download generated UUIDs"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dudu Tools"
+  }
 }
   </script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "inLanguage": "en",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "什么是 UUID？",
+      "name": "What is a UUID?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "UUID（通用唯一识别码）是一个 128 位的标识符，用于在分布式系统中唯一标识信息。"
+        "text": "A UUID is a 128-bit identifier designed to be unique across systems and datasets."
       }
     },
     {
       "@type": "Question",
-      "name": "UUID v4、v7、v1 有什么区别？",
+      "name": "What is the difference between UUID v4 and v7?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "v4 是完全随机的；v7 基于时间戳排序，对数据库索引更友好；v1 包含时间戳和节点信息。"
+        "text": "UUID v4 is random. UUID v7 includes a timestamp, which makes it more suitable for sortable database indexes."
       }
     },
     {
       "@type": "Question",
-      "name": "UUID 生成安全吗？",
+      "name": "Is the UUID generator secure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "使用浏览器 Web Crypto API 生成安全的随机数，无需网络请求。"
+        "text": "The generator uses browser cryptography APIs for random UUIDs and does not require a network request."
       }
     },
     {
       "@type": "Question",
-      "name": "最多能一次生成多少个 UUID？",
+      "name": "How many UUIDs can I generate at once?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "支持一次生成最多 10,000 个 UUID，性能优异。"
+        "text": "The tool supports generating up to 10,000 UUIDs in one batch."
       }
     }
   ]
 }
   </script>
+
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Vercel Speed Insights -->
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
   <header class="header">
     <div class="container">
       <div class="header-inner">
         <h1 class="logo">🔑 UUID Generator</h1>
-        <p class="tagline">UUID 批量生成 · v4 / v1 / v7 · 多种格式输出</p>
+        <p class="tagline">Bulk UUID generation · v4 / v7 / v1 · formatting options</p>
+        <nav class="language-switcher" aria-label="Language"><a class="active" href="./" lang="en">EN</a><a class="" href="zh/" lang="zh-CN">中文</a></nav>
       </div>
     </div>
   </header>
@@ -108,15 +121,15 @@
       <div class="controls-section">
         <div class="control-row">
           <div class="control-group">
-            <label for="uuid-version">UUID 版本</label>
+            <label for="uuid-version">UUID version</label>
             <select id="uuid-version">
-              <option value="v4">UUID v4（随机）</option>
-              <option value="v7">UUID v7（时间排序）</option>
-              <option value="v1">UUID v1（时间戳）</option>
+              <option value="v4">UUID v4 (random)</option>
+              <option value="v7">UUID v7 (time ordered)</option>
+              <option value="v1">UUID v1 (timestamp)</option>
             </select>
           </div>
           <div class="control-group">
-            <label for="uuid-count">生成数量</label>
+            <label for="uuid-count">Quantity</label>
             <div class="count-input-group">
               <input type="range" id="uuid-count-range" min="1" max="1000" value="10">
               <input type="number" id="uuid-count" class="num-input" value="10" min="1" max="10000">
@@ -126,36 +139,36 @@
 
         <div class="control-row">
           <div class="control-group">
-            <label>格式选项</label>
+            <label>Format options</label>
             <div class="format-options">
               <label class="checkbox-label">
                 <input type="checkbox" id="opt-upper" checked>
-                大写
+                Uppercase
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="opt-dashes" checked>
-                包含连字符
+                Include hyphens
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="opt-braces">
-                花括号 {}
+                Braces {}
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="opt-quotes">
-                引号 ""
+                Quotes ""
               </label>
               <label class="checkbox-label">
                 <input type="checkbox" id="opt-commas">
-                逗号分隔
+                Comma separated
               </label>
             </div>
           </div>
         </div>
 
         <div class="action-row">
-          <button class="btn btn-primary btn-lg" onclick="generateUUIDs()">⚡ 生成</button>
-          <button class="btn btn-secondary" onclick="copyAll()">📋 复制全部</button>
-          <button class="btn btn-secondary" onclick="downloadAll()">⬇ 下载</button>
+          <button class="btn btn-primary btn-lg" onclick="generateUUIDs()">Generate</button>
+          <button class="btn btn-secondary" onclick="copyAll()">Copy all</button>
+          <button class="btn btn-secondary" onclick="downloadAll()">Download</button>
           <span id="gen-stats" class="gen-stats"></span>
         </div>
       </div>
@@ -163,18 +176,41 @@
       <!-- Output -->
       <div class="output-section">
         <div class="output-header">
-          <label>生成的 UUID</label>
+          <label>Generated UUIDs</label>
           <span id="uuid-count-display" class="count-badge">0</span>
         </div>
-        <textarea id="uuid-output" class="uuid-output" readonly placeholder="点击「生成」按钮生成 UUID..." spellcheck="false"></textarea>
+        <textarea id="uuid-output" class="uuid-output" readonly placeholder="Click Generate to create UUIDs..." spellcheck="false"></textarea>
       </div>
     </div>
+    <section class="seo-content" aria-label="Tool guide and frequently asked questions">
+      <div class="seo-block">
+        <h2>What is UUID Generator?</h2>
+        <p>A browser-based UUID generator for creating v4 random UUIDs, v7 time-ordered UUIDs, and v1 timestamp UUIDs in bulk.</p>
+      </div>
+      <div class="seo-grid">
+        <div class="seo-block">
+          <h2>Key Features</h2>
+          <ul><li>Generate UUID v4 values</li><li>Generate UUID v7 time-ordered values</li><li>Generate UUID v1 timestamp values</li><li>Create up to 10,000 UUIDs at once</li><li>Choose uppercase, braces, quotes, and comma formats</li><li>Copy or download generated UUIDs</li></ul>
+        </div>
+        <div class="seo-block">
+          <h2>Common Use Cases</h2>
+          <ul><li>Create database IDs</li><li>Generate test fixtures</li><li>Prepare API examples</li><li>Create sortable UUID v7 identifiers</li></ul>
+        </div>
+      </div>
+      <div class="seo-block faq-list">
+        <h2>Frequently Asked Questions</h2>
+        <details><summary>What is a UUID?</summary><p>A UUID is a 128-bit identifier designed to be unique across systems and datasets.</p></details>
+        <details><summary>What is the difference between UUID v4 and v7?</summary><p>UUID v4 is random. UUID v7 includes a timestamp, which makes it more suitable for sortable database indexes.</p></details>
+        <details><summary>Is the UUID generator secure?</summary><p>The generator uses browser cryptography APIs for random UUIDs and does not require a network request.</p></details>
+        <details><summary>How many UUIDs can I generate at once?</summary><p>The tool supports generating up to 10,000 UUIDs in one batch.</p></details>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>🔑 UUID Generator — 使用 Crypto API 生成安全随机数</p>
-      <p class="footer-small">纯前端工具 · 零服务端 · 隐私安全</p>
+      <p>🔑 UUID Generator — Secure random values generated with the Crypto API</p>
+      <p class="footer-small">Frontend-only tool · no server storage · privacy-first</p>
     </div>
   </footer>
 
