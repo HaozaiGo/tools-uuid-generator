@@ -1,0 +1,44 @@
+# UUID Generator
+
+> A browser-based UUID generator for creating v4 random UUIDs, v7 time-ordered UUIDs, and v1 timestamp UUIDs in bulk.
+
+Canonical URL: https://uuid.toolkitbox.org/
+Chinese URL: https://uuid.toolkitbox.org/zh/
+
+## What it does
+
+- Generate UUID v4 values
+- Generate UUID v7 time-ordered values
+- Generate UUID v1 timestamp values
+- Create up to 10,000 UUIDs at once
+- Choose uppercase, braces, quotes, and comma formats
+- Copy or download generated UUIDs
+
+## Best for
+
+- Create database IDs
+- Generate test fixtures
+- Prepare API examples
+- Create sortable UUID v7 identifiers
+
+## Privacy
+
+This tool is designed for browser-based processing whenever possible. User-provided content is not stored by ToolkitBox.
+
+## FAQ
+
+### What is a UUID?
+
+A UUID is a 128-bit identifier designed to be unique across systems and datasets.
+
+### What is the difference between UUID v4 and v7?
+
+UUID v4 is random. UUID v7 includes a timestamp, which makes it more suitable for sortable database indexes.
+
+### Is the UUID generator secure?
+
+The generator uses browser cryptography APIs for random UUIDs and does not require a network request.
+
+### How many UUIDs can I generate at once?
+
+The tool supports generating up to 10,000 UUIDs in one batch.
