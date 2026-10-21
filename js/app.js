@@ -1,5 +1,9 @@
 /* === UUID Generator - App Logic === */
 
+function uiText(en, zh) {
+  return document.documentElement.lang.startsWith('zh') ? zh : en;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initControls();
   generateUUIDs();
@@ -17,13 +21,14 @@ function initControls() {
   ['uuid-version', 'uuid-count', 'uuid-count-range', 'opt-upper', 'opt-dashes', 'opt-braces', 'opt-quotes', 'opt-commas'].forEach(id => {
     document.getElementById(id).addEventListener('change', generateUUIDs);
   });
-  document.getElementById('uuid-count').addEventListener('change', generateUUIDs);
 }
 
 /* ---- UUID Generation ---- */
 function generateUUIDs() {
   const version = document.getElementById('uuid-version').value;
-  const count = parseInt(document.getElementById('uuid-count').value) || 1;
+  const count = Math.min(10000, Math.max(1, parseInt(document.getElementById('uuid-count').value) || 1));
+  document.getElementById('uuid-count').value = count;
+  document.getElementById('uuid-count-range').value = Math.min(1000, count);
   const upper = document.getElementById('opt-upper').checked;
   const dashes = document.getElementById('opt-dashes').checked;
   const braces = document.getElementById('opt-braces').checked;
@@ -38,7 +43,7 @@ function generateUUIDs() {
     switch (version) {
       case 'v4': uuid = uuidV4(); break;
       case 'v7': uuid = uuidV7(); break;
-      case 'v1': uuid = uuidV1(i); break;
+      case 'v1': uuid = uuidV1(); break;
     }
     uuids.push(uuid);
   }
@@ -97,31 +102,25 @@ function uuidV7() {
 }
 
 /* ---- UUID v1 (Timestamp + node) ---- */
-let uuidV1ClockSeq = 0;
+let uuidV1ClockSeq = crypto.getRandomValues(new Uint16Array(1))[0] & 0x3fff;
 let uuidV1LastTime = 0;
+let uuidV1LastTimestamp = 0n;
+const uuidV1Node = crypto.getRandomValues(new Uint8Array(6));
+uuidV1Node[0] |= 1;
 
-function uuidV1(offset) {
+function uuidV1() {
   const bytes = new Uint8Array(16);
-  crypto.getRandomValues(bytes);
-
-  // UUID v1: time_low (4), time_mid (2), time_hi_and_version (2),
-  // clock_seq_hi_and_reserved (1), clock_seq_low (1), node (6)
-
-  // 100-nanosecond intervals since UUID epoch (Oct 15, 1582)
-  // We'll use a simplified version with Date.now()
-  const now = Date.now() + offset;
-  
-  // Use a simple monotonically increasing time
-  if (now <= uuidV1LastTime) {
+  const now = Date.now();
+  if (now < uuidV1LastTime) {
     uuidV1ClockSeq = (uuidV1ClockSeq + 1) & 0x3fff;
   }
   uuidV1LastTime = now;
 
-  // 60-bit timestamp (in 100ns intervals, approximated)
-  const uuidEpoch = now + 0x01b21dd213814000; // Offset from UUID epoch
-  
-  // Time fields (little-endian for UUID v1)
-  const timeHex = uuidEpoch.toString(16).padStart(12, '0');
+  // RFC 9562: Gregorian epoch ticks require exact 100ns arithmetic.
+  let timestamp = BigInt(now) * 10000n + 0x01b21dd213814000n;
+  if (timestamp <= uuidV1LastTimestamp) timestamp = uuidV1LastTimestamp + 1n;
+  uuidV1LastTimestamp = timestamp;
+  const timeHex = timestamp.toString(16).padStart(15, '0');
   const timeLow = parseInt(timeHex.substring(timeHex.length - 8), 16);
   const timeMid = parseInt(timeHex.substring(timeHex.length - 12, timeHex.length - 8), 16);
   const timeHi = parseInt(timeHex.substring(0, timeHex.length - 12), 16) & 0x0fff;
@@ -137,17 +136,11 @@ function uuidV1(offset) {
   bytes[7] = timeHi & 0xff;
 
   // Clock sequence
-  const clockSeq = (uuidV1ClockSeq + offset) & 0x3fff;
+  const clockSeq = uuidV1ClockSeq;
   bytes[8] = ((clockSeq >> 8) & 0x3f) | 0x80; // variant
   bytes[9] = clockSeq & 0xff;
 
-  // Node (random)
-  bytes[10] = bytes[0]; // Use some randomization
-  bytes[11] = bytes[1];
-  bytes[12] = bytes[2];
-  bytes[13] = bytes[3];
-  bytes[14] = bytes[4];
-  bytes[15] = bytes[5];
+  bytes.set(uuidV1Node, 10);
 
   return hex(bytes, [4, 2, 2, 2, 6]);
 }
@@ -166,17 +159,22 @@ function hex(bytes, groups) {
 }
 
 /* ======== Actions ======== */
-function copyAll() {
+async function copyAll() {
   const output = document.getElementById('uuid-output');
-  if (!output.value) { showToast('❌ 没有内容'); return; }
+  if (!output.value) { showToast(uiText('No content', '没有内容')); return; }
   
   // If commas mode, join properly
-  navigator.clipboard.writeText(output.value).then(() => showToast('✅ 已复制'));
+  try {
+    await navigator.clipboard.writeText(output.value);
+    showToast(uiText('Copied', '已复制'));
+  } catch {
+    showToast(uiText('Copy failed', '复制失败'));
+  }
 }
 
 function downloadAll() {
   const output = document.getElementById('uuid-output');
-  if (!output.value) { showToast('❌ 没有内容'); return; }
+  if (!output.value) { showToast(uiText('No content', '没有内容')); return; }
 
   const blob = new Blob([output.value], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
@@ -185,7 +183,7 @@ function downloadAll() {
   a.download = 'uuids.txt';
   a.click();
   URL.revokeObjectURL(url);
-  showToast('⬇ 已下载');
+  showToast(uiText('Downloaded', '已下载'));
 }
 
 /* ======== Utility ======== */
